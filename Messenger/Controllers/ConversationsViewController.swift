@@ -7,6 +7,5 @@ class ConversationsViewController: UIViewController {
         
     }
 
-
 }
 
