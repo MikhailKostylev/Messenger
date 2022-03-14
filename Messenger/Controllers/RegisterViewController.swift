@@ -1,12 +1,11 @@
 import UIKit
 
-class ViewController: UIViewController {
+class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
     }
 
-
 }
-
