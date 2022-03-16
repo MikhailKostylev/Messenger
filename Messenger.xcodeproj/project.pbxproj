@@ -20,7 +20,6 @@
 		1F16FB2A27DF931A00417B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F16FB2927DF931A00417B2C /* Assets.xcassets */; };
 		1F16FB2D27DF931A00417B2C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F16FB2B27DF931A00417B2C /* LaunchScreen.storyboard */; };
 		1F50F97627E251F70034A0A3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F50F97527E251F70034A0A3 /* GoogleService-Info.plist */; };
-		1F731C3B27E0B03000C15CEE /* UserDefaults+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F731C3A27E0B03000C15CEE /* UserDefaults+extensions.swift */; };
 		1F731C3E27E0B0CF00C15CEE /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F731C3D27E0B0CF00C15CEE /* Keys.swift */; };
 		1F731C4027E0C8FC00C15CEE /* UIView+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F731C3F27E0C8FC00C15CEE /* UIView+extensions.swift */; };
 		1F731C4327E0EF2900C15CEE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F731C4227E0EF2900C15CEE /* Constants.swift */; };
@@ -46,7 +45,6 @@
 		1F16FB2C27DF931A00417B2C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F16FB2E27DF931A00417B2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F50F97527E251F70034A0A3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		1F731C3A27E0B03000C15CEE /* UserDefaults+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+extensions.swift"; sourceTree = "<group>"; };
 		1F731C3D27E0B0CF00C15CEE /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		1F731C3F27E0C8FC00C15CEE /* UIView+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extensions.swift"; sourceTree = "<group>"; };
 		1F731C4227E0EF2900C15CEE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 		1F731C3827E0AFF200C15CEE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1F731C3A27E0B03000C15CEE /* UserDefaults+extensions.swift */,
 				1F731C3F27E0C8FC00C15CEE /* UIView+extensions.swift */,
 				1F731C4427E0F7C900C15CEE /* String+extensions.swift */,
 			);
@@ -325,7 +322,6 @@
 				1F731C4327E0EF2900C15CEE /* Constants.swift in Sources */,
 				1F731C4527E0F7C900C15CEE /* String+extensions.swift in Sources */,
 				1F16FB2127DF931900417B2C /* AppDelegate.swift in Sources */,
-				1F731C3B27E0B03000C15CEE /* UserDefaults+extensions.swift in Sources */,
 				1F038F1227DFA413005884E2 /* ProfileViewController.swift in Sources */,
 				1F16FB2327DF931900417B2C /* SceneDelegate.swift in Sources */,
 				1F038F0C27DFA3C2005884E2 /* PhotoViewerViewController.swift in Sources */,
