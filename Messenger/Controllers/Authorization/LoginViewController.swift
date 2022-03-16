@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -139,8 +140,9 @@ class LoginViewController: UIViewController {
     
     //MARK: - Logic funcs
     private func login() throws {
-        let email = emailField.text!
-        let password = passwordField.text!
+        guard let email = emailField.text, let password = passwordField.text else {
+            return
+        }
         
         if email.isEmpty || password.isEmpty {
             throw LoginError.incompleteForm
@@ -151,7 +153,17 @@ class LoginViewController: UIViewController {
         if password.count < 6 {
             throw LoginError.incorrectPasswordLength
         }
+        
         // Firabase Log In
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            guard let result = authResult, error == nil else {
+                print("Failed to log in")
+                return
+            }
+            
+            let user = result.user
+            print("Logged In User: \(user)")
+        }
     }
 }
 
