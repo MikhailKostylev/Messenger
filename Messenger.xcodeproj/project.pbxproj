@@ -141,11 +141,11 @@
 		1F16FB1F27DF931900417B2C /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				1F038F0527DFA02F005884E2 /* Resources */,
 				1F038F0427DFA01F005884E2 /* ViewModels */,
 				1F038F0327DFA015005884E2 /* Models */,
 				1F038F0227DFA00B005884E2 /* Views */,
 				1F038F0127DF9FFE005884E2 /* Controllers */,
-				1F038F0527DFA02F005884E2 /* Resources */,
 				1F16FB2E27DF931A00417B2C /* Info.plist */,
 			);
 			path = Messenger;
