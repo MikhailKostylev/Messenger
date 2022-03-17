@@ -1,0 +1,18 @@
+BCSymbolMap Version: 2.0
+Apple clang version 13.0.0 (clang-1300.0.29.3)
+/Applications/Xcode_13.0.0_fb.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.0.sdk
+AppleTVOS15.0.sdk
+/Users/jawwad/Library/Developer/Xcode/DerivedData/FacebookSDK-cemfugqejgyihshdojeedwbtidoh/Build/Intermediates.noindex/ArchiveIntermediates/FBAEMKit_TV-Dynamic/IntermediateBuildFilesPath/FBAEMKit.build/Release-appletvos/FBAEMKit_TV-Dynamic.build/DerivedSources/FBAEMKit_vers.c
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMAdvertiserMultiEntryRule.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMAdvertiserRuleFactory.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMAdvertiserSingleEntryRule.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMConfiguration.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMEvent.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMInvocation.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMNetworker.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMReporter.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMRequestBody.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMRule.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMSettings.m
+/Users/jawwad/fbsource/fbobjc/ios-sdk/FBAEMKit/FBAEMKit/FBAEMUtility.m

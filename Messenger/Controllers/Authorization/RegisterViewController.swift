@@ -22,7 +22,7 @@ class RegisterViewController: UIViewController {
     
     private let firstNameField: UITextField = {
         let field = UITextField()
-        field.autocapitalizationType = .none
+        field.autocapitalizationType = .words
         field.autocorrectionType = .no
         field.returnKeyType = .next
         field.layer.borderWidth = 1
@@ -37,7 +37,7 @@ class RegisterViewController: UIViewController {
     
     private let lastNameField: UITextField = {
         let field = UITextField()
-        field.autocapitalizationType = .none
+        field.autocapitalizationType = .words
         field.autocorrectionType = .no
         field.returnKeyType = .next
         field.layer.borderWidth = 1
@@ -52,6 +52,7 @@ class RegisterViewController: UIViewController {
     
     private let emailField: UITextField = {
         let field = UITextField()
+        field.keyboardType = .emailAddress
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
         field.returnKeyType = .next
@@ -95,17 +96,16 @@ class RegisterViewController: UIViewController {
     //MARK: - Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         view.backgroundColor = .white
         title = "Register"
-        //FIXME: - do this
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register",
-                                                            style: .done,
-                                                            target: self,
-                                                            action: #selector(didTapRegister))
+      
         registerButton.addTarget(self,
                                  action: #selector(registerButtonTapped),
                                  for: .touchUpInside)
         
+        firstNameField.delegate = self
+        lastNameField.delegate = self
         emailField.delegate = self
         passwordField.delegate = self
         
@@ -133,6 +133,7 @@ class RegisterViewController: UIViewController {
         scrollView.frame = view.bounds
         
         let size = scrollView.width/3
+        
         imageView.frame = CGRect(x: (scrollView.width-size)/2,
                                  y: 20,
                                  width: size,
@@ -140,30 +141,35 @@ class RegisterViewController: UIViewController {
         imageView.layer.cornerRadius = imageView.width/2.0
         
         firstNameField.frame = CGRect(x: 30,
-                                      y: imageView.bottom+20,
+                                      y: imageView.bottom+10,
                                       width: scrollView.width-60,
                                       height: 52)
-        
+
         lastNameField.frame = CGRect(x: 30,
-                                     y: firstNameField.bottom+20,
+                                     y: firstNameField.bottom+10,
                                      width: scrollView.width-60,
                                      height: 52)
         
         emailField.frame = CGRect(x: 30,
-                                  y: lastNameField.bottom+20,
+                                  y: lastNameField.bottom+10,
                                   width: scrollView.width-60,
                                   height: 52)
         
         passwordField.frame = CGRect(x: 30,
-                                     y: emailField.bottom+20,
+                                     y: emailField.bottom+10,
                                      width: scrollView.width-60,
                                      height: 52)
         
         registerButton.frame = CGRect(x: 30,
-                                      y: passwordField.bottom+30,
+                                      y: passwordField.bottom+20,
                                       width: scrollView.width-60,
                                       height: 52)
         registerButton.dropShadow()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        firstNameField.becomeFirstResponder()
     }
     
     //MARK: - Action funcs
@@ -171,19 +177,7 @@ class RegisterViewController: UIViewController {
         presentPhotoActionSheet()
     }
     
-    @objc private func didTapRegister() {
-        let registerVC = RegisterViewController()
-        registerVC.title = "Create Account"
-        navigationController?.pushViewController(registerVC, animated: true)
-    }
-    
     @objc private func registerButtonTapped() {
-        
-        firstNameField.resignFirstResponder()
-        lastNameField.resignFirstResponder()
-        emailField.resignFirstResponder()
-        passwordField.resignFirstResponder()
-        
         do {
             try login()
             // Transition to next screen
@@ -224,7 +218,6 @@ class RegisterViewController: UIViewController {
             }
             
             guard !exists else {
-                // User already exists
                 Alert.showBasic(title: "Oops!", message: "Looks like a user account for this email address already exists", vc: strongSelf, view: strongSelf.view)
                 return
             }

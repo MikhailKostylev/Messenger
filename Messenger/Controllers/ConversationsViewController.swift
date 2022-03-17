@@ -2,10 +2,10 @@ import UIKit
 import FirebaseAuth
 
 class ConversationsViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemRed
+        tabBarController?.tabBar.backgroundColor = .secondarySystemBackground.withAlphaComponent(0.7)
     }
     
     override func viewDidAppear(_ animated: Bool) {

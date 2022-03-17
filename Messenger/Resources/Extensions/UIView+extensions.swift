@@ -31,19 +31,19 @@ extension UIView {
         self.layer.cornerRadius = radius
     }
     
-    public func dropShadow() {
+    public func dropShadow(radius: CGFloat = 8) {
         layer.masksToBounds = false
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: 0, height: 8)
-        layer.shadowRadius = 8
+        layer.shadowRadius = radius
         layer.shadowPath = UIBezierPath(rect: bounds).cgPath
         layer.shouldRasterize = false
     }
     
     public func addGradient() {
         let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.link.cgColor, UIColor.cyan.cgColor]
+        gradient.colors = [UIColor.cyan.cgColor, UIColor.link.cgColor]
         gradient.opacity = 0.6
         gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1.0)

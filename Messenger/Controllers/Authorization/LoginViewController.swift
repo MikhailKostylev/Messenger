@@ -1,5 +1,6 @@
 import UIKit
 import FirebaseAuth
+import FBSDKLoginKit
 
 class LoginViewController: UIViewController {
     
@@ -19,9 +20,10 @@ class LoginViewController: UIViewController {
     
     private let emailField: UITextField = {
         let field = UITextField()
+        field.keyboardType = .emailAddress
         field.autocapitalizationType = .none
         field.autocorrectionType = .no
-        field.returnKeyType = .continue
+        field.returnKeyType = .next
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.systemGray.cgColor
         field.placeholder = "Email Address..."
@@ -59,9 +61,12 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let facebookLoginButton = FBLoginButton()
+    
     //MARK: - Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         view.backgroundColor = .white
         title = "Log In"
         
@@ -82,6 +87,7 @@ class LoginViewController: UIViewController {
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
         scrollView.addSubview(loginButton)
+        scrollView.addSubview(facebookLoginButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -110,6 +116,17 @@ class LoginViewController: UIViewController {
                                    height: 52)
         loginButton.addGradient()
         loginButton.dropShadow()
+        
+        facebookLoginButton.frame = CGRect(x: 30,
+                                   y: loginButton.bottom+30,
+                                   width: scrollView.width-60,
+                                   height: 52)
+        facebookLoginButton.dropShadow()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        emailField.becomeFirstResponder()
     }
     
     //MARK: - Action funcs
