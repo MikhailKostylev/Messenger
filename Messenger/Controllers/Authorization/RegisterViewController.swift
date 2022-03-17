@@ -26,7 +26,7 @@ class RegisterViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .next
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.darkGray.cgColor
+        field.layer.borderColor = UIColor.systemGray.cgColor
         field.placeholder = "First Name..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
@@ -41,7 +41,7 @@ class RegisterViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .next
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.darkGray.cgColor
+        field.layer.borderColor = UIColor.systemGray.cgColor
         field.placeholder = "Last Name..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
@@ -56,7 +56,7 @@ class RegisterViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .next
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.darkGray.cgColor
+        field.layer.borderColor = UIColor.systemGray.cgColor
         field.placeholder = "Email Address..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
@@ -71,7 +71,7 @@ class RegisterViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .done
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.darkGray.cgColor
+        field.layer.borderColor = UIColor.systemGray.cgColor
         field.placeholder = "Password..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
@@ -225,7 +225,7 @@ class RegisterViewController: UIViewController {
             
             guard !exists else {
                 // User already exists
-                Alert.showBasic(title: "OK", message: "Looks like a u ser account for this email address already exists", vc: self!, view: self!.view)
+                Alert.showBasic(title: "Oops!", message: "Looks like a user account for this email address already exists", vc: strongSelf, view: strongSelf.view)
                 return
             }
             

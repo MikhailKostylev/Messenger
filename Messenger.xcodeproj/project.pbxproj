@@ -111,11 +111,11 @@
 			children = (
 				1F16FB2027DF931900417B2C /* AppDelegate.swift */,
 				1F16FB2227DF931900417B2C /* SceneDelegate.swift */,
-				1F263E4B27E33A240026B187 /* DatabaseManager.swift */,
 				1F731C4227E0EF2900C15CEE /* Constants.swift */,
 				1F731C3D27E0B0CF00C15CEE /* Keys.swift */,
 				1F731C4627E0F88400C15CEE /* Alert.swift */,
 				1F731C4827E1074B00C15CEE /* Errors.swift */,
+				1FAFD33F27E3582100DBC1C1 /* Database */,
 				1F731C3827E0AFF200C15CEE /* Extensions */,
 			);
 			path = Resources;
@@ -178,6 +178,14 @@
 				1F731C4427E0F7C900C15CEE /* String+extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1FAFD33F27E3582100DBC1C1 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				1F263E4B27E33A240026B187 /* DatabaseManager.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		69E9F04D9010066A81E7A353 /* Pods */ = {

@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .continue
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.darkGray.cgColor
+        field.layer.borderColor = UIColor.systemGray.cgColor
         field.placeholder = "Email Address..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
         field.autocorrectionType = .no
         field.returnKeyType = .done
         field.layer.borderWidth = 1
-        field.layer.borderColor = UIColor.darkGray.cgColor
+        field.layer.borderColor = UIColor.systemGray.cgColor
         field.placeholder = "Password..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
@@ -161,6 +161,7 @@ class LoginViewController: UIViewController {
             }
             
             guard let result = authResult, error == nil else {
+                Alert.showBasic(title: "Incorrect Email or Password", message: "Please check your details and try again", vc: strongSelf, view: strongSelf.view)
                 print("Failed to log in")
                 return
             }
