@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please allow access to select a photo for your profile</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow access to take a profile picture</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -21,21 +25,21 @@
 			</array>
 		</dict>
 	</dict>
-    <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fbAPP-ID</string>
-      </array>
-      </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>APP-ID</string>
-    <key>FacebookClientToken</key>
-    <string>CLIENT-TOKEN</string>
-    <key>FacebookDisplayName</key>
-    <string>APP-NAME</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb681026416372975</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>681026416372975</string>
+	<key>FacebookClientToken</key>
+	<string>069032460591304665db5b27d080966e</string>
+	<key>FacebookDisplayName</key>
+	<string>Messenger</string>
     <key>LSApplicationQueriesSchemes</key>
     <array>
       <string>fbapi</string>
