@@ -1,9 +1,11 @@
 import UIKit
 import FirebaseAuth
+import FirebaseCore
 import FBSDKLoginKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
-    
+        
     //MARK: - UI elements
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -67,6 +69,14 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private let googleLoginButton: GIDSignInButton = {
+        let button = GIDSignInButton()
+        button.addTarget(self, action: #selector(googleSignInTapped), for: .touchUpInside)
+        button.style = .wide
+        button.colorScheme = .dark
+        return button
+    }()
+    
     //MARK: - Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,6 +103,7 @@ class LoginViewController: UIViewController {
         scrollView.addSubview(passwordField)
         scrollView.addSubview(loginButton)
         scrollView.addSubview(facebookLoginButton)
+        scrollView.addSubview(googleLoginButton)
     }
     
     override func viewDidLayoutSubviews() {
@@ -119,19 +130,18 @@ class LoginViewController: UIViewController {
                                    y: passwordField.bottom+30,
                                    width: scrollView.width-60,
                                    height: 52)
-        loginButton.addGradient()
+        loginButton.addGradient(color1: UIColor.cyan.cgColor, color2: UIColor.link.cgColor)
         loginButton.dropShadow()
         
         facebookLoginButton.frame = CGRect(x: 30,
                                            y: loginButton.bottom+30,
                                            width: scrollView.width-60,
                                            height: 52)
-        facebookLoginButton.dropShadow()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        emailField.becomeFirstResponder()
+        
+        googleLoginButton.frame = CGRect(x: 30,
+                                         y: facebookLoginButton.bottom+20,
+                                         width: scrollView.width-60,
+                                         height: 52)
     }
     
     //MARK: - Action funcs
@@ -157,6 +167,59 @@ class LoginViewController: UIViewController {
             Alert.showBasic(title: "Password Too Short", message: "Password should be at least 6 characters", vc: self, view: self.view)
         } catch {
             Alert.showBasic(title: "Unable To Login", message: "There was an error when attempting to login", vc: self, view: self.view)
+        }
+    }
+    
+    @objc private func googleSignInTapped() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        
+        // Google Sign In
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
+            
+            if let error = error {
+                print("\(error.localizedDescription)")
+                return
+            }
+            
+            guard let email = user?.profile?.email,
+                  let firstName = user?.profile?.givenName,
+                  let lastName = user?.profile?.familyName else {
+                      return
+                  }
+            
+            DatabaseManager.shared.userExists(with: email) { exists in
+                if !exists {
+                    DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName,
+                                                                        lastName: lastName,
+                                                                        emailAddress: email))
+                }
+            }
+            
+            guard let authentication = user?.authentication,
+                  let idToken = authentication.idToken else {
+                      return
+                  }
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                           accessToken: authentication.accessToken)
+            
+            FirebaseAuth.Auth.auth().signIn(with: credential) { [weak self] authResult, error in
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                guard authResult != nil, error == nil else {
+                    if let error = error {
+                        print("Failed to sign in with Google: \(error)")
+                    }
+                    return
+                }
+                print("Successfully logged user in")
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
@@ -215,7 +278,7 @@ extension LoginViewController: LoginButtonDelegate {
         // no operation
     }
     
-    
+    // Facebook Log In
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         guard let token = result?.token?.tokenString else {
             print("User failded to log in with facebook")
@@ -264,7 +327,7 @@ extension LoginViewController: LoginButtonDelegate {
                 
                 guard authResult != nil, error == nil else {
                     if let error = error {
-                        print("Facebook credential login failde, MFA may be needed - \(error)")
+                        print("Failed to sign in with Facebook: \(error)")
                     }
                     return
                 }

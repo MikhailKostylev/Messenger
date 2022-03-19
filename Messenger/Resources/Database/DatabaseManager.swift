@@ -1,5 +1,6 @@
 import Foundation
 import FirebaseDatabase
+import GoogleSignIn
 
 final class DatabaseManager {
     
@@ -8,7 +9,7 @@ final class DatabaseManager {
     private let database = Database.database(url: databaseUrl).reference()
 }
 
-//MARK: - Account Manage ment
+//MARK: - Account Management
 extension DatabaseManager {
     /// Check by email if user exists in our database 
     public func userExists(with email: String,

@@ -161,10 +161,11 @@ class RegisterViewController: UIViewController {
                                      height: 52)
         
         registerButton.frame = CGRect(x: 30,
-                                      y: passwordField.bottom+20,
+                                      y: passwordField.bottom+30,
                                       width: scrollView.width-60,
                                       height: 52)
         registerButton.dropShadow()
+        registerButton.addGradient(color1: UIColor.green.cgColor, color2: UIColor.systemGreen.cgColor)
     }
     
     override func viewDidAppear(_ animated: Bool) {

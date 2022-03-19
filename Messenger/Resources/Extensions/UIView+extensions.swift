@@ -27,28 +27,28 @@ extension UIView {
         return self.frame.size.width + self.frame.origin.x
     }
     
-    public func roundCorners(radius: CGFloat = 12) {
+    public func roundCorners(radius: CGFloat = cornerRadius) {
         self.layer.cornerRadius = radius
     }
     
-    public func dropShadow(radius: CGFloat = 8) {
+    public func dropShadow(radius: CGFloat = cornerRadius) {
         layer.masksToBounds = false
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = UIColor.darkGray.cgColor
         layer.shadowOpacity = 0.5
-        layer.shadowOffset = CGSize(width: 0, height: 8)
+        layer.shadowOffset = CGSize(width: 0, height: 3)
         layer.shadowRadius = radius
         layer.shadowPath = UIBezierPath(rect: bounds).cgPath
         layer.shouldRasterize = false
     }
     
-    public func addGradient() {
+    public func addGradient(radius: CGFloat = cornerRadius, color1: CGColor, color2: CGColor) {
         let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.cyan.cgColor, UIColor.link.cgColor]
+        gradient.colors = [color1, color2]
         gradient.opacity = 0.6
         gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
         gradient.frame = self.bounds
-        gradient.cornerRadius = cornerRadius
+        gradient.cornerRadius = radius
         self.layer.insertSublayer(gradient, at: 0)
     }
 }
