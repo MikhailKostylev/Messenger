@@ -5,7 +5,7 @@ import JGProgressHUD
 class RegisterViewController: UIViewController {
     
     //MARK: - UI elements
-    private let spinner = JGProgressHUD(style: .dark)
+    private let spinner = JGProgressHUD(style: .extraLight)
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -99,14 +99,16 @@ class RegisterViewController: UIViewController {
     //MARK: - Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Setup VC
         hideKeyboardWhenTappedAround()
         view.backgroundColor = .white
         title = "Register"
         
+        //Add targets
         registerButton.addTarget(self,
                                  action: #selector(registerButtonTapped),
                                  for: .touchUpInside)
-        
+        // Delegates
         firstNameField.delegate = self
         lastNameField.delegate = self
         emailField.delegate = self
@@ -121,6 +123,7 @@ class RegisterViewController: UIViewController {
         scrollView.addSubview(passwordField)
         scrollView.addSubview(registerButton)
         
+        //Add Gestures
         scrollView.isUserInteractionEnabled = true
         imageView.isUserInteractionEnabled = true
         
@@ -133,6 +136,8 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        // Configure UI elements
         scrollView.frame = view.bounds
         
         let size = scrollView.width/3
@@ -171,11 +176,6 @@ class RegisterViewController: UIViewController {
         registerButton.addGradient(color1: UIColor.green.cgColor, color2: UIColor.systemGreen.cgColor)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        firstNameField.becomeFirstResponder()
-    }
-    
     //MARK: - Action funcs
     @objc func didTapChangeProfilePic() {
         presentPhotoActionSheet()
@@ -183,7 +183,7 @@ class RegisterViewController: UIViewController {
     
     @objc private func registerButtonTapped() {
         do {
-            try login()
+            try register()
             // Transition to next screen
         } catch LoginError.incompleteForm {
             Alert.showBasic(title: "Incomplete Form", message: "Please enter all information to create new account" , vc: self, view: self.view)
@@ -195,8 +195,8 @@ class RegisterViewController: UIViewController {
             Alert.showBasic(title: "Unable To Register", message: "There was an error when attempting to register", vc: self, view: self.view)
         }
     }
-    //MARK: - Logic funcs
-    private func login() throws {
+    //MARK: - Register in Firebase
+    private func register() throws {
         guard let email = emailField.text,
               let password = passwordField.text,
               let firstName = firstNameField.text,
@@ -227,19 +227,41 @@ class RegisterViewController: UIViewController {
             }
             
             guard !exists else {
+                // user already exists
                 Alert.showBasic(title: "Oops!", message: "Looks like a user account for this email address already exists", vc: strongSelf, view: strongSelf.view)
                 return
             }
             
             FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 guard authResult != nil, error == nil else {
-                    print("Auth Error")
+                    print("Error creating user")
                     return
                 }
                 
-                DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName,
-                                                                    lastName: lastName,
-                                                                    emailAddress: email))
+                let chatUser = ChatAppUser(firstName: firstName,
+                                           lastName: lastName,
+                                           emailAddress: email)
+                DatabaseManager.shared.insertUser(with: chatUser) { success in
+                    if success {
+                        // upload image
+                        guard let image = strongSelf.imageView.image,
+                              let data = image.pngData() else {
+                                  return
+                              }
+                        
+                        let filename = chatUser.profilePictureFileName
+                        StorageManager.shared.uploadProfilePicture(with: data,
+                                                                   filename: filename) { result in
+                            switch result {
+                            case .success(let downloadUrl):
+                                UserDefaults.standard.set(downloadUrl, forKey: Keys.profilePictureUrl.rawValue)
+                                print(downloadUrl)
+                            case .failure(let error):
+                                print(error)
+                            }
+                        }
+                    }
+                }
                 
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
             }
@@ -247,6 +269,7 @@ class RegisterViewController: UIViewController {
     }
 }
 
+//MARK: - Textfield Delegate
 extension RegisterViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
@@ -267,6 +290,7 @@ extension RegisterViewController: UITextFieldDelegate {
     }
 }
 
+//MARK: - Choose Photo Action Sheet
 extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func presentPhotoActionSheet() {

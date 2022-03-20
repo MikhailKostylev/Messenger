@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
     //MARK: - Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -81,5 +82,4 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         
         self.present(actionSheeet, animated: true, completion: nil)
     }
-    
 }

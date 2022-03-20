@@ -11,7 +11,7 @@ final class DatabaseManager {
 
 //MARK: - Account Management
 extension DatabaseManager {
-    /// Check by email if user exists in our database 
+    /// Check by email if user exists in our database
     public func userExists(with email: String,
                            completion: @escaping ((Bool) -> Void)) {
         
@@ -29,11 +29,18 @@ extension DatabaseManager {
     }
     
     /// Insetrs new user to database
-    public func insertUser(with user: ChatAppUser) {
+    public func insertUser(with user: ChatAppUser, completion: @escaping (Bool) -> Void) {
         database.child(user.safeEmail).setValue([
             "first_name": user.firstName,
             "last_name": user.lastName
-        ])
+        ]) { error, _ in
+            guard error == nil else {
+                print("Failed to write to database")
+                completion(false)
+                return
+            }
+            completion(true)
+        }
     }
 }
 
@@ -48,5 +55,8 @@ struct ChatAppUser {
         return safeEmail
     }
     
-    //    let profilePictureUrl: String
+    var profilePictureFileName: String {
+        //        joe-gmail-com_profile_picture.png
+        return "\(safeEmail)_profile_picture.png"
+    }
 }

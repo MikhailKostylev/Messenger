@@ -5,7 +5,7 @@ import JGProgressHUD
 class ConversationsViewController: UIViewController {
     
     //MARK: - UI elements
-    private let spinner = JGProgressHUD(style: .dark)
+    private let spinner = JGProgressHUD(style: .extraLight)
     
     private let tableView: UITableView = {
         let table = UITableView()
