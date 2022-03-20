@@ -5,16 +5,26 @@ import GoogleSignIn
 
 class ProfileViewController: UIViewController {
     
-    @IBOutlet var tableView: UITableView!
+    //MARK: - UI elements
+    private let tableView: UITableView = {
+        let table = UITableView()
+        table.register(UITableViewCell.self,
+                       forCellReuseIdentifier: "cell")
+        return table
+    }()
     
     private let data = ["Log Out"]
     
+    //MARK: - Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UITableViewCell.self,
-                           forCellReuseIdentifier: "cell")
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        tableView.frame = view.bounds
     }
     
 }

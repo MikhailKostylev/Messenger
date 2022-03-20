@@ -68,25 +68,10 @@
                     <view key="view" contentMode="scaleToFill" id="d2X-Mz-930">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jqk-RC-7Fh">
-                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="YPZ-NQ-zbT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="jqk-RC-7Fh" firstAttribute="top" secondItem="YPZ-NQ-zbT" secondAttribute="top" id="2cV-Vp-GGy"/>
-                            <constraint firstItem="YPZ-NQ-zbT" firstAttribute="bottom" secondItem="jqk-RC-7Fh" secondAttribute="bottom" id="4wZ-XC-ueb"/>
-                            <constraint firstItem="jqk-RC-7Fh" firstAttribute="leading" secondItem="YPZ-NQ-zbT" secondAttribute="leading" id="HwK-ht-hod"/>
-                            <constraint firstItem="YPZ-NQ-zbT" firstAttribute="trailing" secondItem="jqk-RC-7Fh" secondAttribute="trailing" id="MUF-2u-b9K"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="hhD-0e-2vP"/>
-                    <connections>
-                        <outlet property="tableView" destination="jqk-RC-7Fh" id="N1p-TR-Ef6"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJo-Cd-7nO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
