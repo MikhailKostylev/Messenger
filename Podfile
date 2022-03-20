@@ -15,5 +15,11 @@ target 'Messenger' do
 
   # Google
   pod 'GoogleSignIn'
+  
+  # Other
+  pod 'MessageKit'
+  pod 'JGProgressHUD'
+  pod 'RealmSwift'
+  pod 'SDWebImage'
 
 end
