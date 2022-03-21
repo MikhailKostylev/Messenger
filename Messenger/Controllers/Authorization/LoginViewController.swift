@@ -220,6 +220,9 @@ class LoginViewController: UIViewController {
             }
             
             let user = result.user
+            
+            UserDefaults.standard.set(email, forKey: Keys.email.rawValue)
+            
             print("Logged In User: \(user)")
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         }
@@ -246,6 +249,8 @@ class LoginViewController: UIViewController {
                       return
                   }
             
+            UserDefaults.standard.set(email, forKey: Keys.email.rawValue)
+            
             DatabaseManager.shared.userExists(with: email) { exists in
                 if !exists {
                     
@@ -270,7 +275,6 @@ class LoginViewController: UIViewController {
                                     let filename = chatUser.profilePictureFileName
                                     StorageManager.shared.uploadProfilePicture(with: data,
                                                                                filename: filename) { result in
-                                        
                                         switch result {
                                         case .success(let downloadUrl):
                                             UserDefaults.standard.set(downloadUrl, forKey: Keys.profilePictureUrl.rawValue)
@@ -366,6 +370,8 @@ extension LoginViewController: LoginButtonDelegate {
                       print("Failde to get name and email from fb result")
                       return
                   }
+            
+            UserDefaults.standard.set(email, forKey: Keys.email.rawValue)
             
             DatabaseManager.shared.userExists(with: email) { exists in
                 if !exists {
