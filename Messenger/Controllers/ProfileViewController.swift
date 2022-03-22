@@ -50,6 +50,7 @@ class ProfileViewController: UIViewController {
                                                   y: 75,
                                                   width: 150,
                                                   height: 150))
+        imageView.image = UIImage(systemName: "person.circle")
         imageView.contentMode = .scaleAspectFill
         imageView.backgroundColor = .white
         imageView.layer.borderColor = UIColor.white.cgColor
