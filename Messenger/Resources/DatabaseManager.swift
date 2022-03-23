@@ -131,6 +131,7 @@ extension DatabaseManager {
               "date": Date()
               "sender_email": String
               "is_read": false
+              "name": name
             }
         ]
      }
@@ -139,6 +140,7 @@ extension DatabaseManager {
         [
             "conversation_id": "unique_id"
             "other_user_email": "email"
+            "name": name
             "latest_message": {
                 "date": Data()
                 "latest_message": "message"
@@ -149,7 +151,7 @@ extension DatabaseManager {
      */
     
     /// Create a new conversation user with target user email and first message sent
-    public func createNewConversation(with otherUserEmail: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
+    public func createNewConversation(with otherUserEmail: String, name: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
         guard let currentEmail = UserDefaults.standard.value(forKey: Keys.email.rawValue) as? String else {
             return
         }
@@ -197,6 +199,7 @@ extension DatabaseManager {
             let newConversationData: [String: Any] = [
                 "id": conversationId,
                 "other_user_email": otherUserEmail,
+                "name": name,
                 "latest_message": [
                     "date": dateString,
                     "message": message,
@@ -216,9 +219,10 @@ extension DatabaseManager {
                         return
                     }
                     
-                    self?.finishCreatedConversation(conversationId: conversationId,
-                                                   firstMessage: firstMessage,
-                                                   completion: completion)
+                    self?.finishCreatedConversation(name: name,
+                                                    conversationId: conversationId,
+                                                    firstMessage: firstMessage,
+                                                    completion: completion)
                 }
                 
             } else {
@@ -234,15 +238,16 @@ extension DatabaseManager {
                         return
                     }
                     
-                    self?.finishCreatedConversation(conversationId: conversationId,
-                                                   firstMessage: firstMessage,
-                                                   completion: completion)
+                    self?.finishCreatedConversation(name: name,
+                                                    conversationId: conversationId,
+                                                    firstMessage: firstMessage,
+                                                    completion: completion)
                 }
             }
         }
     }
     
-    private func finishCreatedConversation(conversationId: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
+    private func finishCreatedConversation(name: String, conversationId: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
       
         let messageDate = firstMessage.sentDate
         let dateString = ChatViewController.dateFormatter.string(from: messageDate)
@@ -284,7 +289,8 @@ extension DatabaseManager {
             "content": message,
             "date": dateString,
             "sender_email": currentUserEmail,
-            "is_read": false
+            "is_read": false,
+            "name": name
         ]
         
         let value: [String: Any] = [
@@ -303,8 +309,35 @@ extension DatabaseManager {
     }
     
     /// Fethes and returns all conversations for user with passed in email
-    public func getAllConversations(for email: String, completion: @escaping (Result<String, Error>) -> Void) {
-        
+    public func getAllConversations(for email: String, completion: @escaping (Result<[Conversation], Error>) -> Void) {
+        database.child("\(email)/conversations").observe(.value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]] else {
+                completion(.failure(DatabaseErrors.failedToFetch))
+                return
+            }
+            
+            let conversations: [Conversation] = value.compactMap { dictionary in
+                guard let conversationId = dictionary["id"] as? String,
+                      let name = dictionary["name"] as? String,
+                      let otherUserEmail = dictionary["other_user_email"] as? String,
+                      let latestMessage = dictionary["latest_message"] as? [String:Any],
+                      let date = dictionary["date"] as? String,
+                      let message = latestMessage["message"] as? String,
+                      let isRead = latestMessage["is_read"] as? Bool else {
+                    return nil
+                }
+                
+                let latestMessageObject = LatestMessage(date: date,
+                                                        text: message,
+                                                        isRead: isRead)
+                return Conversation(id: conversationId,
+                                    name: name,
+                                    otherUserEmail: otherUserEmail,
+                                    latestMessage: latestMessageObject)
+            }
+            
+            completion(.success(conversations))
+        }
     }
     
     /// Gets all messages for a given conversation
