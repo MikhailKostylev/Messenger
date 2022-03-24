@@ -119,6 +119,7 @@ class ConversationsViewController: UIViewController {
             case .success(let conversations):
                 print("Successfuly got conversation models")
                 guard !conversations.isEmpty else {
+                    print("Conversations are empty!") 
                     return
                 }
                 

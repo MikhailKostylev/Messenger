@@ -321,7 +321,7 @@ extension DatabaseManager {
                       let name = dictionary["name"] as? String,
                       let otherUserEmail = dictionary["other_user_email"] as? String,
                       let latestMessage = dictionary["latest_message"] as? [String:Any],
-                      let date = dictionary["date"] as? String,
+                      let date = latestMessage["date"] as? String,
                       let message = latestMessage["message"] as? String,
                       let isRead = latestMessage["is_read"] as? Bool else {
                     return nil

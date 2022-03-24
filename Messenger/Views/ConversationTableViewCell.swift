@@ -50,7 +50,7 @@ class ConversationTableViewCell: UITableViewCell {
                                      width: contentView.width-userImageView.width-20,
                                      height: (contentView.height-20)/2)
         
-        userNameLabel.frame = CGRect(x: userImageView.right+10,
+        userMessageLabel.frame = CGRect(x: userImageView.right+10,
                                      y: userNameLabel.bottom+10,
                                      width: contentView.width-userImageView.width-20,
                                      height: (contentView.height-20)/2)
@@ -60,7 +60,8 @@ class ConversationTableViewCell: UITableViewCell {
         self.userMessageLabel.text = model.latestMessage.text
         self.userNameLabel.text = model.name
         
-        let path = "\(model.otherUserEmail)_profile_picture.png"
+        let path = "images/\(model.otherUserEmail)_profile_picture.png"
+        
         StorageManager.shared.downloadURL(for: path) { [weak self] result in
             switch result {
             case .success(let url):
