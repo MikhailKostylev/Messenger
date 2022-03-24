@@ -82,8 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				1F16FB2427DF931900417B2C /* ConversationsViewController.swift */,
-				1FCE63E727E7350E00799B80 /* ChatViewController.swift */,
 				1F038F0F27DFA400005884E2 /* NewConversationViewController.swift */,
+				1FCE63E727E7350E00799B80 /* ChatViewController.swift */,
 				1F731C3727E0AEF600C15CEE /* Authorization */,
 				1F038F0B27DFA3C2005884E2 /* PhotoViewerViewController.swift */,
 				1F038F0D27DFA3D2005884E2 /* VideoPlayerViewController.swift */,

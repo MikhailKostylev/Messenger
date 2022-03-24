@@ -160,7 +160,7 @@ extension DatabaseManager {
         
         let reference = database.child(safeEmail)
         
-        reference.observeSingleEvent(of: .value) { snapshot in
+        reference.observeSingleEvent(of: .value) { [weak self] snapshot in
             guard var userNode = snapshot.value as? [String: Any] else {
                 completion(false)
                 print("User not found")
@@ -207,9 +207,32 @@ extension DatabaseManager {
                 ]
             ]
             
+            let recipient_newConversationData: [String: Any] = [
+                "id": conversationId,
+                "other_user_email": safeEmail,
+                "name": "Self",
+                "latest_message": [
+                    "date": dateString,
+                    "message": message,
+                    "is_read": false
+                ]
+            ]
+            
+            // Update recipient conversation entry
+            self?.database.child("\(otherUserEmail)/conversations").observeSingleEvent(of: .value) { [weak self] snapshot in
+                if var conversations = snapshot.value as? [[String: Any]] {
+                    //append
+                    conversations.append(recipient_newConversationData)
+                    self?.database.child("\(otherUserEmail)/conversations").setValue(conversations)
+                } else {
+                    //create
+                    self?.database.child("\(otherUserEmail)/conversations").setValue([recipient_newConversationData])
+                }
+            }
+            
+            // Update current user conversation entry
             if var conversations = userNode["conversations"] as? [[String: Any]] {
-                // conversation array exists for current user
-                // you should append
+                // conversation array exists for current user, you should append
                 conversations.append(newConversationData)
                 userNode["conversations"] = conversations
                 
@@ -226,8 +249,7 @@ extension DatabaseManager {
                 }
                 
             } else {
-                // conversation array does NOT exists
-                // create it
+                // conversation array does NOT exists, create it
                 userNode["conversations"] = [
                     newConversationData
                 ]
@@ -341,8 +363,37 @@ extension DatabaseManager {
     }
     
     /// Gets all messages for a given conversation
-    public func getAllMessagesForConversation(with id: String, completion: @escaping (Result<String, Error>) -> Void) {
-        
+    public func getAllMessagesForConversation(with id: String, completion: @escaping (Result<[Message], Error>) -> Void) {
+        database.child("\(id)/messages").observe(.value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]] else {
+                completion(.failure(DatabaseErrors.failedToFetch))
+                return
+            }
+            
+            let messages: [Message] = value.compactMap { dictionary in
+                guard let name = dictionary["name"] as? String,
+                      let senderEmail = dictionary["sender_email"] as? String,
+                      let messageId = dictionary["id"] as? String,
+                      let type = dictionary["type"] as? String,
+                      let content = dictionary["content"] as? String,
+                      let dateString = dictionary["date"] as? String,
+                      let isRead = dictionary["is_read"] as? Bool,
+                      let date = ChatViewController.dateFormatter.date(from: dateString) else {
+                    return nil
+                }
+                
+                let sender = Sender(photoURL: "",
+                                    senderId: senderEmail,
+                                    displayName: name)
+                
+                return Message(sender: sender,
+                               messageId: messageId,
+                               sentDate: date,
+                               kind: .text(content))
+            }
+            
+            completion(.success(messages))
+        }
     }
     
     /// Sends a message with target conversation and message
