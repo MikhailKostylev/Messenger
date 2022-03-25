@@ -125,8 +125,7 @@
 				1F731C3D27E0B0CF00C15CEE /* Keys.swift */,
 				1F731C4627E0F88400C15CEE /* Alert.swift */,
 				1F731C4827E1074B00C15CEE /* Errors.swift */,
-				1F263E4B27E33A240026B187 /* DatabaseManager.swift */,
-				1F566E1D27E7706F000A4F0A /* StorageManager.swift */,
+				1FB9EAFB27EE07C2006643E3 /* Managers */,
 				1F731C3827E0AFF200C15CEE /* Extensions */,
 			);
 			path = Resources;
@@ -190,6 +189,15 @@
 				1FAFD34027E3815300DBC1C1 /* UIViewController+extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1FB9EAFB27EE07C2006643E3 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1F263E4B27E33A240026B187 /* DatabaseManager.swift */,
+				1F566E1D27E7706F000A4F0A /* StorageManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		69E9F04D9010066A81E7A353 /* Pods */ = {
