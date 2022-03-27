@@ -94,11 +94,9 @@ class ConversationsViewController: UIViewController {
         tableView.isHidden = false
     }
     
-    private func createNewConversation(result: [String: String]) {
-        guard let name = result["name"],
-              let email = result["email"] else {
-                  return
-              }
+    private func createNewConversation(result: SearchResult) {
+        let name = result.name
+        let email = result.email
         
         let vc = ChatViewController(with: email, id: nil)
         vc.isNewConversation = true

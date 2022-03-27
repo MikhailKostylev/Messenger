@@ -38,14 +38,37 @@ final class StorageManager {
     
     /// Uploads image that will be sent in a conversation message
     public func uploadMessagePhoto(with data: Data, filename: String, completion: @escaping UploadPictureCompletion) {
-        storage.child("message_images/\(filename)").putData(data, metadata: nil) { metadata, error in
+        storage.child("message_images/\(filename)").putData(data, metadata: nil) { [weak self] metadata, error in
             guard error == nil else {
                 print("Failed to upload data to firebase for message photo")
                 completion(.failure(StorageErrors.failedToUpload))
                 return
             }
             
-            self.storage.child("message_images/\(filename)").downloadURL { url, error in
+            self?.storage.child("message_images/\(filename)").downloadURL { url, error in
+                guard let url = url else {
+                    print("Failed to get download url")
+                    completion(.failure(StorageErrors.failedToDownloadUrl))
+                    return
+                }
+                
+                let urlString = url.absoluteString
+                print("Download url returned \(urlString)")
+                completion(.success( urlString))
+            }
+        }
+    }
+    
+    /// Uploads video that will be sent in a conversation message
+    public func uploadMessageVideo(with fileUrl: URL, filename: String, completion: @escaping UploadPictureCompletion) {
+        storage.child("message_videos/\(filename)").putFile(from: fileUrl, metadata: nil) { [weak self] metadata, error in
+            guard error == nil else {
+                print("Failed to upload video file to firebase for message video")
+                completion(.failure(StorageErrors.failedToUpload))
+                return
+            }
+            
+            self?.storage.child("message_videos/\(filename)").downloadURL { url, error in
                 guard let url = url else {
                     print("Failed to get download url")
                     completion(.failure(StorageErrors.failedToDownloadUrl))
