@@ -18,6 +18,7 @@ struct LatestMessage {
 class ConversationsViewController: UIViewController {
     
     private var conversations = [Conversation]()
+    private var loginObserver: NSObjectProtocol?
     
     //MARK: - UI elements
     private let spinner = JGProgressHUD(style: .extraLight)
@@ -52,6 +53,17 @@ class ConversationsViewController: UIViewController {
         setupTableView()
         fetchConversations()
         startListeningForConversations()
+        
+        // Add notifications
+        loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification,
+                                                               object: nil,
+                                                               queue: .main) { [weak self] _ in
+            guard let stongSelf = self else {
+                return
+            }
+            
+            stongSelf.startListeningForConversations()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -109,6 +121,11 @@ class ConversationsViewController: UIViewController {
         guard let email = UserDefaults.standard.value(forKey: Keys.email.rawValue) as? String else {
             return
         }
+        
+        if let observer = loginObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        
         print("Starting conversation fetch...")
         
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)
@@ -147,7 +164,6 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
         }
         
         let model = conversations[indexPath.row]
-        
         cell.configure(with: model)
         
         return cell
@@ -166,5 +182,26 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // begin delete
+            let conversationId = conversations[indexPath.row].id
+            tableView.beginUpdates()
+            
+            DatabaseManager.shared.deleteConversation(conversationId: conversationId) { [weak self] success in
+                if success {
+                        self?.conversations.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .left)
+                }
+            }
+            
+            tableView.endUpdates()
+        }
     }
 }
