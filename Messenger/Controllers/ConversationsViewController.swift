@@ -21,7 +21,7 @@ class ConversationsViewController: UIViewController {
     private var loginObserver: NSObjectProtocol?
     
     //MARK: - UI elements
-    private let spinner = JGProgressHUD(style: .extraLight)
+    private let spinner = JGProgressHUD(style: .dark)
     
     private let tableView: UITableView = {
         let table = UITableView()

@@ -9,7 +9,7 @@ class NewConversationViewController: UIViewController {
     private var hasFetched = false
     
     //MARK: - UI elements
-    private let spinner = JGProgressHUD(style: .extraLight)
+    private let spinner = JGProgressHUD(style: .dark)
     
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -38,7 +38,7 @@ class NewConversationViewController: UIViewController {
     //MARK: - Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         view.addSubview(noResultsLabel)
         view.addSubview(tableView)

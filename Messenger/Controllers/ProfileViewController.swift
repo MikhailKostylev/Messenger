@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController {
                                               y: 0,
                                               width: view.width,
                                               height: 300))
-        headerView.backgroundColor = .link
+        headerView.backgroundColor = .systemBackground
         
         let imageView = UIImageView(frame: CGRect(x: (headerView.width-150)/2,
                                                   y: 75,
@@ -52,9 +52,9 @@ class ProfileViewController: UIViewController {
                                                   height: 150))
         imageView.image = UIImage(systemName: "person.circle")
         imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .white
-        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.backgroundColor = .tertiarySystemBackground
         imageView.layer.borderWidth = 3
+        imageView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = imageView.width/2
         headerView.addSubview(imageView)

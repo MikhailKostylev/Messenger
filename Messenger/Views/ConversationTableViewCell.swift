@@ -10,6 +10,8 @@ class ConversationTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 50
         imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 3
+        imageView.layer.borderColor = UIColor.secondarySystemBackground.cgColor
         return imageView
     }()
     

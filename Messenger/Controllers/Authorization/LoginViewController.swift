@@ -9,7 +9,7 @@ import SwiftUI
 class LoginViewController: UIViewController {
     
     //MARK: - UI elements
-    private let spinner = JGProgressHUD(style: .extraLight)
+    private let spinner = JGProgressHUD(style: .dark)
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
         field.placeholder = "Email Address..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
-        field.backgroundColor = .white
+        field.backgroundColor = .secondarySystemBackground
         field.roundCorners()
         return field
     }()
@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
         field.placeholder = "Password..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
-        field.backgroundColor = .white
+        field.backgroundColor = .secondarySystemBackground
         field.isSecureTextEntry = true
         field.roundCorners()
         return field
@@ -85,7 +85,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         // Setup VC
         hideKeyboardWhenTappedAround()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         title = "Log In"
         
         //Add targets

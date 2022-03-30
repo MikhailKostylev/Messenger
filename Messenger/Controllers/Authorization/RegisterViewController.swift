@@ -5,7 +5,7 @@ import JGProgressHUD
 class RegisterViewController: UIViewController {
     
     //MARK: - UI elements
-    private let spinner = JGProgressHUD(style: .extraLight)
+    private let spinner = JGProgressHUD(style: .dark)
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -16,10 +16,12 @@ class RegisterViewController: UIViewController {
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "person.circle")
-        imageView.backgroundColor = .white
-        imageView.tintColor = .lightGray
+        imageView.backgroundColor = .systemBackground
+        imageView.tintColor = .systemGray
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor.systemGray.cgColor
         return imageView
     }()
     
@@ -33,7 +35,7 @@ class RegisterViewController: UIViewController {
         field.placeholder = "First Name..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
-        field.backgroundColor = .white
+        field.backgroundColor = .secondarySystemBackground
         field.roundCorners()
         return field
     }()
@@ -48,7 +50,7 @@ class RegisterViewController: UIViewController {
         field.placeholder = "Last Name..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
-        field.backgroundColor = .white
+        field.backgroundColor = .secondarySystemBackground
         field.roundCorners()
         return field
     }()
@@ -64,7 +66,7 @@ class RegisterViewController: UIViewController {
         field.placeholder = "Email Address..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
-        field.backgroundColor = .white
+        field.backgroundColor = .secondarySystemBackground
         field.roundCorners()
         return field
     }()
@@ -79,7 +81,7 @@ class RegisterViewController: UIViewController {
         field.placeholder = "Password..."
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
-        field.backgroundColor = .white
+        field.backgroundColor = .secondarySystemBackground
         field.isSecureTextEntry = true
         field.roundCorners()
         return field
@@ -101,7 +103,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         // Setup VC
         hideKeyboardWhenTappedAround()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         title = "Register"
         
         //Add targets
