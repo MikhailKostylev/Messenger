@@ -31,6 +31,7 @@
 		1F731C4927E1074B00C15CEE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F731C4827E1074B00C15CEE /* Errors.swift */; };
 		1FAFD34127E3815300DBC1C1 /* UIViewController+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAFD34027E3815300DBC1C1 /* UIViewController+extensions.swift */; };
 		1FBF738427F46C56008109CC /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF738327F46C56008109CC /* LocationPickerViewController.swift */; };
+		1FBF738627F49884008109CC /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF738527F49884008109CC /* ProfileTableViewCell.swift */; };
 		1FCE63E827E7350E00799B80 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE63E727E7350E00799B80 /* ChatViewController.swift */; };
 		1FD40FB127EB8ED300AA65C5 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD40FB027EB8ED300AA65C5 /* ConversationTableViewCell.swift */; };
 		1FFA60E827F1C437000F125C /* Notification.Name+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFA60E727F1C437000F125C /* Notification.Name+extensions.swift */; };
@@ -64,6 +65,7 @@
 		1F731C4827E1074B00C15CEE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		1FAFD34027E3815300DBC1C1 /* UIViewController+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extensions.swift"; sourceTree = "<group>"; };
 		1FBF738327F46C56008109CC /* LocationPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
+		1FBF738527F49884008109CC /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		1FCE63E727E7350E00799B80 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		1FD40FB027EB8ED300AA65C5 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		1FFA60E727F1C437000F125C /* Notification.Name+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+extensions.swift"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				1F16FB2927DF931A00417B2C /* Assets.xcassets */,
 				1FD40FB027EB8ED300AA65C5 /* ConversationTableViewCell.swift */,
 				1F1B3EA227F08FE1006135A3 /* NewConversationCell.swift */,
+				1FBF738527F49884008109CC /* ProfileTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				1F731C4927E1074B00C15CEE /* Errors.swift in Sources */,
 				1F16FB2527DF931900417B2C /* ConversationsViewController.swift in Sources */,
 				1FFA60E827F1C437000F125C /* Notification.Name+extensions.swift in Sources */,
+				1FBF738627F49884008109CC /* ProfileTableViewCell.swift in Sources */,
 				1F731C3E27E0B0CF00C15CEE /* Keys.swift in Sources */,
 				1F038F0E27DFA3D2005884E2 /* VideoPlayerViewController.swift in Sources */,
 				1FBF738427F46C56008109CC /* LocationPickerViewController.swift in Sources */,
