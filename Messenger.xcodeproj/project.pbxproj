@@ -241,12 +241,15 @@
 				1F16FB1A27DF931900417B2C /* Frameworks */,
 				1F16FB1B27DF931900417B2C /* Resources */,
 				2927A2FBD39CBAEA15B4E9FC /* [CP] Embed Pods Frameworks */,
+				1FB634B627F5C5CD00885080 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Messenger;
+			packageProductDependencies = (
+			);
 			productName = Messenger;
 			productReference = 1F16FB1D27DF931900417B2C /* Messenger.app */;
 			productType = "com.apple.product-type.application";
@@ -275,6 +278,8 @@
 				Base,
 			);
 			mainGroup = 1F16FB1427DF931900417B2C;
+			packageReferences = (
+			);
 			productRefGroup = 1F16FB1E27DF931900417B2C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -299,6 +304,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1FB634B627F5C5CD00885080 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		2927A2FBD39CBAEA15B4E9FC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -428,7 +450,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

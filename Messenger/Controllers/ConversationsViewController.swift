@@ -50,8 +50,10 @@ class ConversationsViewController: UIViewController {
         tabBarController?.tabBar.backgroundColor = .secondarySystemBackground.withAlphaComponent(0.7)
         view.addSubview(tableView)
         view.addSubview(noConversationsLabel)
-        setupTableView()
-        fetchConversations()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         startListeningForConversations()
         
         // Add notifications
@@ -69,6 +71,10 @@ class ConversationsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
+        noConversationsLabel.frame = CGRect(x: 10,
+                                            y: (view.height-100)/2,
+                                            width: view.width-20,
+                                            height: 100)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -111,15 +117,6 @@ class ConversationsViewController: UIViewController {
             navController.modalPresentationStyle = .fullScreen
             present(navController, animated: false)
         }
-    }
-    
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
-    private func fetchConversations() {
-        tableView.isHidden = false
     }
     
     private func createNewConversation(result: SearchResult) {
@@ -169,10 +166,14 @@ class ConversationsViewController: UIViewController {
             case .success(let conversations):
                 print("Successfuly got conversation models")
                 guard !conversations.isEmpty else {
-                    print("Conversations are empty!") 
+                    print("Conversations are empty!")
+                    self?.tableView.isHidden = true
+                    self?.noConversationsLabel.isHidden = false
                     return
                 }
                 
+                self?.noConversationsLabel.isHidden = true
+                self?.tableView.isHidden = false
                 self?.conversations = conversations
                 
                 DispatchQueue.main.async {
@@ -180,6 +181,8 @@ class ConversationsViewController: UIViewController {
                 }
                 
             case .failure(let error):
+                self?.tableView.isHidden = true
+                self?.noConversationsLabel.isHidden = false
                 print("Failed to get convos: \(error)")
             }
         }
