@@ -2,7 +2,7 @@ import UIKit
 import FirebaseAuth
 import JGProgressHUD
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
     
     //MARK: - UI elements
     private let spinner = JGProgressHUD(style: .dark)
@@ -188,13 +188,13 @@ class RegisterViewController: UIViewController {
             try register()
             // Transition to next screen
         } catch LoginError.incompleteForm {
-            Alert.showBasic(title: "Incomplete Form", message: "Please enter all information to create new account" , vc: self, view: self.view)
+            Alert.showBasic(title: "Incomplete Form", message: "Please enter all information to create new account" , vc: self, view: view)
         } catch LoginError.invalidEmail {
-            Alert.showBasic(title: "Invalid Email Format", message: "Please make sure you format your email correctly", vc: self, view: self.view)
+            Alert.showBasic(title: "Invalid Email Format", message: "Please make sure you format your email correctly", vc: self, view: view)
         } catch LoginError.incorrectPasswordLength {
-            Alert.showBasic(title: "Password Too Short", message: "Password should be at least 6 characters", vc: self, view: self.view)
+            Alert.showBasic(title: "Password Too Short", message: "Password should be at least 6 characters", vc: self, view: view)
         } catch {
-            Alert.showBasic(title: "Unable To Register", message: "There was an error when attempting to register", vc: self, view: self.view)
+            Alert.showBasic(title: "Unable To Register", message: "There was an error when attempting to register", vc: self, view: view)
         }
     }
     //MARK: - Register in Firebase
@@ -340,7 +340,7 @@ extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationC
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
         }
-        self.imageView.image = selectedImage
+        imageView.image = selectedImage
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

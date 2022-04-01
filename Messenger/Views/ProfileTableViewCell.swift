@@ -5,15 +5,15 @@ class ProfileTableViewCell: UITableViewCell {
     static let identifier = "ProfileTableViewCell"
     
     public func configure(with viewModel: ProfileViewModel) {
-        self.textLabel?.text = viewModel.title
+        textLabel?.text = viewModel.title
         
         switch viewModel.viewModelType {
         case .info:
-            self.textLabel?.textAlignment = .center
-            self.selectionStyle = .none
+            textLabel?.textAlignment = .center
+            selectionStyle = .none
         case .logout:
-            self.textLabel?.textColor = .red
-            self.textLabel?.textAlignment = .center
+            textLabel?.textColor = .red
+            textLabel?.textAlignment = .center
         }
     }
 }

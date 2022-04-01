@@ -6,7 +6,7 @@ import GoogleSignIn
 import JGProgressHUD
 import SwiftUI
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     
     //MARK: - UI elements
     private let spinner = JGProgressHUD(style: .dark)
@@ -171,13 +171,13 @@ class LoginViewController: UIViewController {
             try mainLogin()
             // Transition to next screen
         } catch LoginError.incompleteForm {
-            Alert.showBasic(title: "Incomplete Form", message: "Please fill out both email and password fields" , vc: self, view: self.view)
+            Alert.showBasic(title: "Incomplete Form", message: "Please fill out both email and password fields" , vc: self, view: view)
         } catch LoginError.invalidEmail {
-            Alert.showBasic(title: "Invalid Email Format", message: "Please make sure you format your email correctly", vc: self, view: self.view)
+            Alert.showBasic(title: "Invalid Email Format", message: "Please make sure you format your email correctly", vc: self, view: view)
         } catch LoginError.incorrectPasswordLength {
-            Alert.showBasic(title: "Password Too Short", message: "Password should be at least 6 characters", vc: self, view: self.view)
+            Alert.showBasic(title: "Password Too Short", message: "Password should be at least 6 characters", vc: self, view: view)
         } catch {
-            Alert.showBasic(title: "Unable To Login", message: "There was an error when attempting to login", vc: self, view: self.view)
+            Alert.showBasic(title: "Unable To Login", message: "There was an error when attempting to login", vc: self, view: view)
         }
     }
     

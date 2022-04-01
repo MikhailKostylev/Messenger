@@ -2,20 +2,8 @@ import UIKit
 import FirebaseAuth
 import JGProgressHUD
 
-struct Conversation {
-    let id: String
-    let name: String
-    let otherUserEmail: String
-    let latestMessage: LatestMessage
-}
-
-struct LatestMessage {
-    let date: String
-    let text: String
-    let isRead: Bool
-}
-
-class ConversationsViewController: UIViewController {
+/// Controller that shows list of conversations
+final class ConversationsViewController: UIViewController {
     
     private var conversations = [Conversation]()
     private var loginObserver: NSObjectProtocol?
@@ -80,6 +68,7 @@ class ConversationsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         validateAuth()
+        startListeningForConversations()
     }
     
     //MARK: - Action funcs
@@ -189,6 +178,7 @@ class ConversationsViewController: UIViewController {
     }
 }
 
+// Table view methods 
 extension ConversationsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -233,11 +223,12 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
             // begin delete
             let conversationId = conversations[indexPath.row].id
             tableView.beginUpdates()
+            self.conversations.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
             
-            DatabaseManager.shared.deleteConversation(conversationId: conversationId) { [weak self] success in
-                if success {
-                        self?.conversations.remove(at: indexPath.row)
-                        tableView.deleteRows(at: [indexPath], with: .left)
+            DatabaseManager.shared.deleteConversation(conversationId: conversationId) { success in
+                if !success {
+                    // add model and row back and show error allert
                 }
             }
             

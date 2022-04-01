@@ -2,7 +2,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class LocationPickerViewController: UIViewController {
+final class LocationPickerViewController: UIViewController {
     
     public var completion: ((CLLocationCoordinate2D) -> Void)?
     private var coordinates: CLLocationCoordinate2D?
@@ -17,7 +17,7 @@ class LocationPickerViewController: UIViewController {
     init(coordinates: CLLocationCoordinate2D?, isPickable: Bool) {
         super.init(nibName: nil, bundle: nil)
         self.coordinates = coordinates
-        self.isPickable = isPickable
+        self.isPickable = coordinates == nil
     }
     
     required init?(coder: NSCoder) {
@@ -37,7 +37,7 @@ class LocationPickerViewController: UIViewController {
             map.addGestureRecognizer(gesture)
         } else {
             // just showing location
-            guard let coordinates = self.coordinates else {
+            guard let coordinates = coordinates else {
                 return
             }
             
