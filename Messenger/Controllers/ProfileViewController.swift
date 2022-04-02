@@ -6,6 +6,9 @@ import SDWebImage
 
 final class ProfileViewController: UIViewController {
     
+    private var data = [ProfileViewModel]()
+    private var loginObserver: NSObjectProtocol?
+    
     //MARK: - UI elements
     private let tableView: UITableView = {
         let table = UITableView()
@@ -14,28 +17,14 @@ final class ProfileViewController: UIViewController {
         return table
     }()
     
-    private var data = [ProfileViewModel]()
-    
     //MARK: - Lifecycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
-        tableView.register(ProfileTableViewCell.self,
-                           forCellReuseIdentifier: ProfileTableViewCell.identifier)
-        tableView.tableHeaderView = createTableHeader()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        data.append(ProfileViewModel(viewModelType: .info,
-                                     title: "\(UserDefaults.standard.value(forKey: Keys.name.rawValue) as? String ?? "No Name")",
-                                     handler: nil))
-        
-        data.append(ProfileViewModel(viewModelType: .info,
-                                     title: "\(UserDefaults.standard.value(forKey: Keys.email.rawValue) as? String ?? "No Email")",
-                                     handler: nil))
+        setupTableView()
+        updateProfileInfo()
         
         data.append(ProfileViewModel(viewModelType: .logout, title: "Log Out", handler: { [weak self] in
-            
             guard let strongSelf = self else {
                 return
             }
@@ -78,6 +67,13 @@ final class ProfileViewController: UIViewController {
             
             strongSelf.present(actionSheeet, animated: true, completion: nil)
         }))
+        
+        // Add notifications
+        loginObserver = NotificationCenter.default.addObserver(forName: .didRegisterNotification,
+                                                               object: nil,
+                                                               queue: .main) { [weak self] _ in
+            self?.updateProfileInfo()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -85,7 +81,33 @@ final class ProfileViewController: UIViewController {
         tableView.frame = view.bounds
     }
     
+    deinit {
+        if let observer = loginObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
+    
     //MARK: - Logic funcs
+    
+    private func setupTableView() {
+        tableView.register(ProfileTableViewCell.self,
+                           forCellReuseIdentifier: ProfileTableViewCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    private func updateProfileInfo() {
+        tableView.tableHeaderView = createTableHeader()
+        
+        data.append(ProfileViewModel(viewModelType: .info,
+                                     title: "\(UserDefaults.standard.value(forKey: Keys.name.rawValue) as? String ?? "No Name")",
+                                     handler: nil))
+        
+        data.append(ProfileViewModel(viewModelType: .info,
+                                     title: "\(UserDefaults.standard.value(forKey: Keys.email.rawValue) as? String ?? "No Email")",
+                                     handler: nil))
+    }
+    
     private func createTableHeader() -> UIView? {
         guard let email = UserDefaults.standard.value(forKey: Keys.email.rawValue) as? String else {
             return nil

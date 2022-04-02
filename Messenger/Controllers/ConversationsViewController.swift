@@ -56,6 +56,11 @@ final class ConversationsViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        validateAuth()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
@@ -65,10 +70,10 @@ final class ConversationsViewController: UIViewController {
                                             height: 100)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        validateAuth()
-        startListeningForConversations()
+    deinit {
+        if let observer = loginObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
     
     //MARK: - Action funcs
@@ -136,17 +141,14 @@ final class ConversationsViewController: UIViewController {
                 strongSelf.navigationController?.pushViewController(vc, animated: true)
             }
         }
+        startListeningForConversations()
     }
     
     private func startListeningForConversations() {
         guard let email = UserDefaults.standard.value(forKey: Keys.email.rawValue) as? String else {
             return
         }
-        
-        if let observer = loginObserver {
-            NotificationCenter.default.removeObserver(observer)
-        }
-        
+
         print("Starting conversation fetch...")
         
         let safeEmail = DatabaseManager.safeEmail(emailAddress: email)

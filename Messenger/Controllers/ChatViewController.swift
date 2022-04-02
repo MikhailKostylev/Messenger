@@ -68,6 +68,7 @@ final class ChatViewController: MessagesViewController {
         }
     }
     
+    //MARK: - Logic funcs
     private func setupInputButton() {
         let button = InputBarButtonItem()
         button.setSize(CGSize(width: 36, height: 36), animated: false)

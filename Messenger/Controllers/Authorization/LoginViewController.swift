@@ -241,6 +241,7 @@ final class LoginViewController: UIViewController {
             UserDefaults.standard.set(email, forKey: Keys.email.rawValue)
             
             print("Logged In User: \(user)")
+            NotificationCenter.default.post(name: .didLogInNotification, object: nil)
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         }
     }
@@ -328,6 +329,7 @@ final class LoginViewController: UIViewController {
                     return
                 }
                 print("Successfully logged user in")
+                NotificationCenter.default.post(name: .didLogInNotification, object: nil)
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
             }
         }
@@ -450,6 +452,7 @@ extension LoginViewController: LoginButtonDelegate {
                     return
                 }
                 print("Successfully logged user in")
+                NotificationCenter.default.post(name: .didLogInNotification, object: nil)
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
             }
         }

@@ -218,7 +218,7 @@ final class RegisterViewController: UIViewController {
         
         spinner.show(in: view)
         
-        // Firebase Log In
+        // Firebase Register
         DatabaseManager.shared.userExists(with: email) { [weak self] exists in
             guard let strongSelf = self else {
                 return
@@ -267,7 +267,7 @@ final class RegisterViewController: UIViewController {
                         }
                     }
                 }
-                
+                NotificationCenter.default.post(name: .didRegisterNotification, object: nil)
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)
             }
         }
