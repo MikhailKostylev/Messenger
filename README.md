@@ -20,24 +20,24 @@ A beginners swift project to create a real time chat application in Swift 5 usin
 
 After cloning the repo, you'll need to add this pods:
 
-  - Firebase
-  pod 'Firebase/Core'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Database'
-  pod 'Firebase/Storage'
-  pod 'Firebase/Crashlytics'
-  pod 'Firebase/Analytics'
+  ## Firebase
+  - pod 'Firebase/Core'
+  - pod 'Firebase/Auth'
+  - pod 'Firebase/Database'
+  - pod 'Firebase/Storage'
+  - pod 'Firebase/Crashlytics'
+  - pod 'Firebase/Analytics'
 
-  - Facebook
-  pod 'FBSDKLoginKit'
+  ## Facebook
+  - pod 'FBSDKLoginKit'
 
-  - Google
-  pod 'GoogleSignIn'
+  ## Google
+  - pod 'GoogleSignIn'
   
-  - Other
-  pod 'MessageKit'
-  pod 'JGProgressHUD'
-  pod 'RealmSwift'
-  pod 'SDWebImage'
+  ## Other
+  - pod 'MessageKit'
+  - pod 'JGProgressHUD'
+  - pod 'RealmSwift'
+  - pod 'SDWebImage'
   
 and run `pod install` to install cocoapod dependencies.
