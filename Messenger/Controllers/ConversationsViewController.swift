@@ -21,7 +21,7 @@ final class ConversationsViewController: UIViewController {
     
     private let noConversationsLabel: UILabel = {
         let label = UILabel()
-        label.isHidden = true
+        label.isHidden = false
         label.text = "No Conversations"
         label.textAlignment = .center
         label.textColor = .gray

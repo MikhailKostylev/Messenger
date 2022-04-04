@@ -22,7 +22,6 @@ target 'Messenger' do
   # Other
   pod 'MessageKit'
   pod 'JGProgressHUD'
-  pod 'RealmSwift'
   pod 'SDWebImage'
 
 end

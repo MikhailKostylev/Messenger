@@ -59,7 +59,13 @@ class ConversationTableViewCell: UITableViewCell {
     }
     
     public func configure(with model: Conversation) {
-        userMessageLabel.text = model.latestMessage.text
+        let photoMessage = model.latestMessage.text
+        if photoMessage.hasPrefix("https://firebasestorage") {
+            userMessageLabel.text  = "Photo Message"
+        } else {
+            userMessageLabel.text = model.latestMessage.text
+        }
+ 
         userNameLabel.text = model.name
         
         let path = "images/\(model.otherUserEmail)_profile_picture.png"

@@ -61,7 +61,6 @@ final class ChatViewController: MessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        messageInputBar.inputTextView.becomeFirstResponder()
         if let conversationId = conversationId {
             listenForMessages(id: conversationId,
                               shouldScrollToBottom: true)
@@ -376,6 +375,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                     print("message sent")
                     DispatchQueue.main.async {
                         self?.messageInputBar.inputTextView.text = nil
+                        self?.messageInputBar.inputTextView.resignFirstResponder()
                     }
                 } else {
                     print("failed to send a message")
@@ -391,10 +391,8 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         }
         
         let dateString = Self.dateFormatter.string(from: Date())
-        
         let safeCurrentEmail = DatabaseManager.safeEmail(emailAddress: currentUserEmail)
         let safeDateString = dateString.replacingOccurrences(of: ".", with: "_")
-        
         let newIdentifier = "\(otherUserEmail)_\(safeCurrentEmail)_\(safeDateString)"
         
         return newIdentifier
