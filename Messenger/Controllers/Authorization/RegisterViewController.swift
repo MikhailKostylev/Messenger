@@ -3,7 +3,7 @@ import FirebaseAuth
 import JGProgressHUD
 
 final class RegisterViewController: UIViewController {
-    
+        
     //MARK: - UI elements
     private let spinner = JGProgressHUD(style: .dark)
     
@@ -91,7 +91,7 @@ final class RegisterViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Register", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemGreen
+        button.backgroundColor = .link
         button.layer.masksToBounds = true
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         button.roundCorners()
@@ -145,7 +145,7 @@ final class RegisterViewController: UIViewController {
         let size = scrollView.width/3
         
         imageView.frame = CGRect(x: (scrollView.width-size)/2,
-                                 y: 20,
+                                 y: 0,
                                  width: size,
                                  height: size)
         imageView.layer.cornerRadius = imageView.width/2.0
@@ -175,7 +175,7 @@ final class RegisterViewController: UIViewController {
                                       width: scrollView.width-60,
                                       height: 52)
         registerButton.dropShadow()
-        registerButton.addGradient(color1: UIColor.green.cgColor, color2: UIColor.systemGreen.cgColor)
+        registerButton.addGradient(color1: UIColor.cyan.cgColor, color2: UIColor.link.cgColor)
     }
     
     //MARK: - Action funcs

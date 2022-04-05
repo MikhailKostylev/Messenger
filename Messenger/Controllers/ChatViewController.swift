@@ -57,6 +57,9 @@ final class ChatViewController: MessagesViewController {
         messagesCollectionView.messageCellDelegate = self
         messageInputBar.delegate = self
         setupInputButton()
+        
+        scrollsToLastItemOnKeyboardBeginsEditing = true
+        maintainPositionOnKeyboardFrameChanged = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -376,6 +379,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
                     DispatchQueue.main.async {
                         self?.messageInputBar.inputTextView.text = nil
                         self?.messageInputBar.inputTextView.resignFirstResponder()
+                        self?.messagesCollectionView.scrollToLastItem(at: .bottom, animated: true)
                     }
                 } else {
                     print("failed to send a message")
@@ -503,6 +507,11 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 
 extension ChatViewController: MessageCellDelegate {
     
+    func didTapBackground(in cell: MessageCollectionViewCell) {
+        messageInputBar.inputTextView.resignFirstResponder()
+        messagesCollectionView.scrollToLastItem(at: .bottom, animated: true)
+    }
+    
     func didTapMessage(in cell: MessageCollectionViewCell) {
         guard let indexPath = messagesCollectionView.indexPath(for: cell ) else {
             return
@@ -550,4 +559,3 @@ extension ChatViewController: MessageCellDelegate {
         }
     }
 }
-

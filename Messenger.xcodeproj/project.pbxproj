@@ -119,11 +119,10 @@
 		1F038F0227DFA00B005884E2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1F038F0627DFA070005884E2 /* Storyboards */,
-				1F16FB2927DF931A00417B2C /* Assets.xcassets */,
 				1FD40FB027EB8ED300AA65C5 /* ConversationTableViewCell.swift */,
 				1F1B3EA227F08FE1006135A3 /* NewConversationCell.swift */,
 				1FBF738527F49884008109CC /* ProfileTableViewCell.swift */,
+				1F038F0627DFA070005884E2 /* Storyboards */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,6 +170,7 @@
 			children = (
 				1F16FB2627DF931900417B2C /* Main.storyboard */,
 				1F16FB2B27DF931A00417B2C /* LaunchScreen.storyboard */,
+				1F16FB2927DF931A00417B2C /* Assets.xcassets */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
