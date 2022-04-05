@@ -37,7 +37,6 @@ After cloning the repo, you'll need to add this pods:
   ## Other
   - pod 'MessageKit'
   - pod 'JGProgressHUD'
-  - pod 'RealmSwift'
   - pod 'SDWebImage'
   
 and run `pod install` to install cocoapod dependencies.
