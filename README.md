@@ -16,9 +16,7 @@ Real time chat application in Swift 5 using Firebase
 - User Profile
 - Dark Mode Support
 
-## Set Up
-
-After cloning the repo, you'll need to add this pods:
+## Dependencies used in the creation process:
 
   ## Firebase
   - pod 'Firebase/Core'
@@ -38,5 +36,3 @@ After cloning the repo, you'll need to add this pods:
   - pod 'MessageKit'
   - pod 'JGProgressHUD'
   - pod 'SDWebImage'
-  
-and run `pod install` to install cocoapod dependencies.
