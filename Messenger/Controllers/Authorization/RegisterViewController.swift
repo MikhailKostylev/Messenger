@@ -180,6 +180,7 @@ final class RegisterViewController: UIViewController {
     
     //MARK: - Action funcs
     @objc func didTapChangeProfilePic() {
+        HapticsManager.shared.vibrateForSelection()
         presentPhotoActionSheet()
     }
     
@@ -211,6 +212,8 @@ final class RegisterViewController: UIViewController {
     }
     //MARK: - Register in Firebase
     private func register() throws {
+        HapticsManager.shared.vibrateForSelection()
+        
         guard let email = emailField.text,
               let password = passwordField.text,
               let firstName = firstNameField.text,

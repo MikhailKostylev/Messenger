@@ -194,11 +194,14 @@ final class LoginViewController: UIViewController {
     }
     
     @objc private func googleLogInTapped() {
+        HapticsManager.shared.vibrateForSelection()
         googleLogIn()
     }
     
     //MARK: - Main Log In (Firebase)
     private func mainLogin() throws {
+        HapticsManager.shared.vibrateForSelection()
+        
         guard let email = emailField.text, let password = passwordField.text else {
             return
         }
@@ -378,6 +381,8 @@ extension LoginViewController: LoginButtonDelegate {
     
     // Facebook Log In
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        HapticsManager.shared.vibrateForSelection()
+        
         guard let token = result?.token?.tokenString else {
             print("User failded to log in with facebook")
             return
