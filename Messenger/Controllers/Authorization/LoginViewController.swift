@@ -172,12 +172,24 @@ final class LoginViewController: UIViewController {
             // Transition to next screen
         } catch LoginError.incompleteForm {
             Alert.showBasic(title: "Incomplete Form", message: "Please fill out both email and password fields" , vc: self, view: view)
+            DispatchQueue.main.async {
+                HapticsManager.shared.vibrate(for: .error)
+            }
         } catch LoginError.invalidEmail {
             Alert.showBasic(title: "Invalid Email Format", message: "Please make sure you format your email correctly", vc: self, view: view)
+            DispatchQueue.main.async {
+                HapticsManager.shared.vibrate(for: .error)
+            }
         } catch LoginError.incorrectPasswordLength {
             Alert.showBasic(title: "Password Too Short", message: "Password should be at least 6 characters", vc: self, view: view)
+            DispatchQueue.main.async {
+                HapticsManager.shared.vibrate(for: .error)
+            }
         } catch {
             Alert.showBasic(title: "Unable To Login", message: "There was an error when attempting to login", vc: self, view: view)
+            DispatchQueue.main.async {
+                HapticsManager.shared.vibrate(for: .error)
+            }
         }
     }
     
@@ -215,6 +227,9 @@ final class LoginViewController: UIViewController {
             
             guard let result = authResult, error == nil else {
                 Alert.showBasic(title: "Incorrect Email or Password", message: "Please check your details and try again", vc: strongSelf, view: strongSelf.view)
+                DispatchQueue.main.async {
+                    HapticsManager.shared.vibrate(for: .error)
+                }
                 print("Failed to log in")
                 return
             }
@@ -241,6 +256,9 @@ final class LoginViewController: UIViewController {
             UserDefaults.standard.set(email, forKey: Keys.email.rawValue)
             
             print("Logged In User: \(user)")
+            DispatchQueue.main.async {
+                HapticsManager.shared.vibrate(for: .success)
+            }
             NotificationCenter.default.post(name: .didLogInNotification, object: nil)
             strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         }

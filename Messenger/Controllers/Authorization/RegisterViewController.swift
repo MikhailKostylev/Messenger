@@ -189,12 +189,24 @@ final class RegisterViewController: UIViewController {
             // Transition to next screen
         } catch LoginError.incompleteForm {
             Alert.showBasic(title: "Incomplete Form", message: "Please enter all information to create new account" , vc: self, view: view)
+            DispatchQueue.main.async {
+                HapticsManager.shared.vibrate(for: .error)
+            }
         } catch LoginError.invalidEmail {
             Alert.showBasic(title: "Invalid Email Format", message: "Please make sure you format your email correctly", vc: self, view: view)
+            DispatchQueue.main.async {
+                HapticsManager.shared.vibrate(for: .error)
+            }
         } catch LoginError.incorrectPasswordLength {
             Alert.showBasic(title: "Password Too Short", message: "Password should be at least 6 characters", vc: self, view: view)
+            DispatchQueue.main.async {
+                HapticsManager.shared.vibrate(for: .error)
+            }
         } catch {
             Alert.showBasic(title: "Unable To Register", message: "There was an error when attempting to register", vc: self, view: view)
+            DispatchQueue.main.async {
+                HapticsManager.shared.vibrate(for: .error)
+            }
         }
     }
     //MARK: - Register in Firebase
@@ -231,6 +243,9 @@ final class RegisterViewController: UIViewController {
             guard !exists else {
                 // user already exists
                 Alert.showBasic(title: "Oops!", message: "Looks like a user account for this email address already exists", vc: strongSelf, view: strongSelf.view)
+                DispatchQueue.main.async {
+                    HapticsManager.shared.vibrate(for: .error)
+                }
                 return
             }
             
@@ -266,6 +281,9 @@ final class RegisterViewController: UIViewController {
                             }
                         }
                     }
+                }
+                DispatchQueue.main.async {
+                    HapticsManager.shared.vibrate(for: .success)
                 }
                 NotificationCenter.default.post(name: .didRegisterNotification, object: nil)
                 strongSelf.navigationController?.dismiss(animated: true, completion: nil)

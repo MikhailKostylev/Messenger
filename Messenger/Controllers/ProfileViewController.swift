@@ -51,6 +51,10 @@ final class ProfileViewController: UIViewController {
                 do {
                     try FirebaseAuth.Auth.auth().signOut()
                     
+                    DispatchQueue.main.async {
+                        HapticsManager.shared.vibrate(for: .success)
+                    }
+                    
                     let loginVC = LoginViewController()
                     let navController = UINavigationController(rootViewController: loginVC)
                     navController.modalPresentationStyle = .fullScreen
